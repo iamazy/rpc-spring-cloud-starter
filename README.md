@@ -39,7 +39,7 @@ rpc:
 #### 3.调用RPC客户端
 ```java
 @Resource(name = "rpcDiscoveryClient")
- private DiscoveryClient discoveryClient;
+private DiscoveryClient discoveryClient;
 ThriftClient thriftClient=(ThriftClient) discoveryClient.getInstance("auth");
 thriftClient.mpiface(TUserService.Client.class, RpcService.USER_SERVICE.getName()).get(username);
 ```
