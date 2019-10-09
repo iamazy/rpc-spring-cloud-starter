@@ -37,7 +37,7 @@ rpc:
 ```
 
 #### 3.调用RPC客户端
-```
+```java
 @Resource(name = "rpcDiscoveryClient")
  private DiscoveryClient discoveryClient;
 ThriftClient thriftClient=(ThriftClient) discoveryClient.getInstance("auth");
