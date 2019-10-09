@@ -8,7 +8,7 @@
 rpc:
   enabled: true
   pools: 
-    wsnauth:
+    auth:
       category: thrift
       max-total: 1000
       max-idle-per-key: 1000
@@ -19,8 +19,8 @@ rpc:
       soft-min-evictable-idle-time-millis: 3000000
       jmx-enabled: false
       server-host-and-ports:
-        -  10.10.12.166:8989
-        -  10.10.2.130:8989
+        -  192.168.12.166:8989
+        -  192.168.2.130:8989
     retrieve-cities:
       #枚举类型  小写也可以
       category: thrift
@@ -33,13 +33,13 @@ rpc:
       soft-min-evictable-idle-time-millis: 1500000
       jmx-enabled: false
       server-host-and-ports:
-        -  10.10.2.130:9000  
+        -  192.168.2.135:9000  
 ```
 
 #### 3.调用RPC客户端
 ```
 @Resource(name = "rpcDiscoveryClient")
  private DiscoveryClient discoveryClient;
-ThriftClient thriftClient=(ThriftClient) discoveryClient.getInstance("wsnauth");
+ThriftClient thriftClient=(ThriftClient) discoveryClient.getInstance("auth");
 thriftClient.mpiface(TUserService.Client.class, RpcService.USER_SERVICE.getName()).get(username);
 ```
