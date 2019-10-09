@@ -4,7 +4,7 @@
 这是之前看到的别人用common-pool2实现的thrift连接池，但是找不到作者(好像是个歪果仁)的github地址了，有人知道的请告诉我一下蟹蟹
 
 #### 1.配置application.yml
-```
+```yaml
 rpc:
   enabled: true
   pools: 
