@@ -20,4 +20,6 @@ package io.github.iamazy.springcloud.transport.rpc.client;
  * @descrition
  **/
 public interface Client {
+
+    void close();
 }

@@ -29,7 +29,7 @@ public class FailoverThriftClient implements ThriftClient {
             FailoverCheckingStrategy<ServerInfo> failoverCheckingStrategy,
             Supplier<List<ServerInfo>> serverInfoProvider,
             ThriftConnectionPoolProvider poolProvider) {
-        FailoverStrategy failoverStrategy=new FailoverStrategy(serverInfoProvider,poolProvider,failoverCheckingStrategy);
+        FailoverStrategy failoverStrategy= new FailoverStrategy(serverInfoProvider, poolProvider, failoverCheckingStrategy);
         this.thriftClient=new DefaultThriftClient(failoverStrategy,failoverStrategy);
     }
 
@@ -63,8 +63,12 @@ public class FailoverThriftClient implements ThriftClient {
         return thriftClient.mpiface(clazz,serviceName,protocolProvider,hash);
     }
 
+    @Override
+    public void close() {
+        thriftClient.close();
+    }
 
-    private class FailoverStrategy implements
+    private static class FailoverStrategy implements
             Supplier<List<ServerInfo>>,
             ThriftConnectionPoolProvider {
 
@@ -103,6 +107,11 @@ public class FailoverThriftClient implements ThriftClient {
         public void returnBrokenConnection(ServerInfo ServerInfo, TTransport transport) {
             failoverCheckingStrategy.fail(ServerInfo);
             connectionPoolProvider.returnBrokenConnection(ServerInfo, transport);
+        }
+
+        @Override
+        public void close() {
+            connectionPoolProvider.close();
         }
     }
 }

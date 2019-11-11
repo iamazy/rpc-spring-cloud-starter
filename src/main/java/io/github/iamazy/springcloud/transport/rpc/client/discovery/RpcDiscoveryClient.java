@@ -28,7 +28,7 @@ public class RpcDiscoveryClient implements DiscoveryClient{
 
     @Override
     public Client getInstance(String poolName) {
-        return rpcClientMap.keySet().contains(poolName)?rpcClientMap.get(poolName):null;
+        return rpcClientMap.getOrDefault(poolName, null);
     }
 
     @Override

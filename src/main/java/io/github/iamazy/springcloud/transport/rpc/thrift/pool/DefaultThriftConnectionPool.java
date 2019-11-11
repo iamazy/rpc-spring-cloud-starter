@@ -60,6 +60,11 @@ public class DefaultThriftConnectionPool implements ThriftConnectionPoolProvider
         }
     }
 
+    @Override
+    public void close(){
+        connections.close();
+    }
+
 
 
 }

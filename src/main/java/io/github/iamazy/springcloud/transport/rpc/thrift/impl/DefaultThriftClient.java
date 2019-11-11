@@ -36,6 +36,11 @@ public class DefaultThriftClient implements ThriftClient {
     }
 
     @Override
+    public void close() {
+        poolProvider.close();
+    }
+
+    @Override
     public <X extends TServiceClient> X iface(Class<X> clazz) {
         return iface(clazz, ThriftClientUtils.nextInt());
     }
@@ -53,7 +58,7 @@ public class DefaultThriftClient implements ThriftClient {
             throw new RuntimeException("Thrift服务列表不能为空!!!");
         }
         hash=Math.abs(hash);
-        hash=hash<0?0:hash;
+        hash= Math.max(hash, 0);
         ServerInfo selected=serverInfos.get(hash%serverInfos.size());
         log.info("获取{}的thrift连接{},hash值为{},",clazz,selected,hash);
         TTransport transport=poolProvider.getConnection(selected);

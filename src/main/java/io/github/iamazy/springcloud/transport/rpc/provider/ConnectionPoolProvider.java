@@ -32,4 +32,6 @@ public interface ConnectionPoolProvider<T> {
      * @param t
      */
     void returnBrokenConnection(ServerInfo rpcServerInfo, T t);
+
+    void close();
 }

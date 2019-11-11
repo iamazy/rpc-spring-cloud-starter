@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.github.iamazy.springcloud.transport.rpc.configuration.RpcPoolConfiguration
+  io.github.iamazy.springcloud.transport.rpc.configuration.RpcPoolConfiguration,\
+  io.github.iamazy.springcloud.transport.rpc.configuration.InitComponent
